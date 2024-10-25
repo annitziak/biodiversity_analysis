@@ -26,26 +26,37 @@ def fetch_species_data(species_id):
         
         # Find the specific div containing the filter by attribute traits
         filter_div = soup.find('div', class_='ui scrolling dropdown item')
+        # bug number 1: only select if the text is "Filter by attribute"
         if filter_div:
             # Find all <a> tags within this div to get trait names
             trait_links = filter_div.find_all('a', class_='item')
+            trait_names = [link.text.strip() for link in trait_links]
             
-            for link in trait_links:
-                trait = link.text.strip()  # Get trait name
-                
-                # Find the specific section for this trait
-                trait_section = soup.find('div', class_='data-section-head', string=trait)
-                if trait_section:
-                    # Get all associated 'trait-val' data for this trait
-                    trait_values = trait_section.find_next_siblings('li', class_='js-data-row-contain')
+            # Retrieve all data-section-head elements once
+            trait_sections = soup.find_all('div', class_='data-section-head')
+
+            # Loop through each trait name to find its associated values
+            for trait in trait_names:
+                for trait_section in trait_sections:
+                    trait_heading = trait_section.find('h3')
                     
-                    for value in trait_values:
-                        trait_val = value.find('div', class_='trait-val')
-                        if trait_val:
-                            # Extract value text
-                            trait_data = trait_val.get_text(strip=True)
-                            # Append data as a new row: species ID, trait, trait value
-                            attributes.append([species_id, trait, trait_data])
+                    # Check if the trait heading matches the current trait
+                    if trait_heading and trait_heading.text.strip() == trait:
+                        # Get all associated 'trait-val' data following the matched heading
+                        trait_values = trait_section.find_next('li', class_='js-data-row-contain')
+                        # bug 2: fix how we get the trait-vals
+                        
+                        while trait_values:
+                            # Extract information within 'trait-val'
+                            trait_val = trait_values.find('div', class_='trait-val')
+                            if trait_val:
+                                # Get the text content for each trait value
+                                trait_data = trait_val.get_text(strip=True)
+                                # Append data as a new row: species ID, trait, trait value
+                                attributes.append([species_id, trait, trait_data])
+                            # Move to the next sibling li with class 'js-data-row-contain'
+                            trait_values = trait_values.find_next_sibling('li', class_='js-data-row-contain')
+                        break  # Exit the loop once the correct trait section is processed
         else:
             print(f"'filter by attribute' section not found for species ID {species_id}")
 
