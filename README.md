@@ -1,5 +1,13 @@
 # aml_assignment
 
+# 26-10-2024
+
+In order to overcome the problem of incomplete data, we decided to take matters into our own hands and scrape the data from the EOL website, without a thought for ethical and legal considerations. The justification for this is that this data is available freely on the web, such usage is in line with their terms (see: https://api.eol.org/docs/what-is-eol/terms-of-use), and that we need this information for a relatively small scale (only 500 species).
+
+We were able to obtain traits for almost all of the species IDs, for traits that describe it further like 'locomotion', 'mass', and traits that can relate it to other species like 'preyed upon', 'are eaten by' etc.
+
+The corresponding code and information can be foundin /scraping
+
 # 25-10-2024
 
 Investigating the completeness of traits available in traits.csv. 

@@ -3,13 +3,16 @@ import csv
 from bs4 import BeautifulSoup
 
 # List of species IDs to query
-species_ids = [962419]  # Add your list of IDs here
+species_ids = []  # Add your list of IDs here
+with open("ids.txt", "r") as file:
+    species_ids = [line.rstrip() for line in file]
 
 # Define the endpoint template
 url_template = "https://api.eol.org/pages/{}/data"
 
 # CSV file to write data
 csv_file = 'my_traits.csv'
+log_file = 'log.txt'
 
 # Function to fetch and parse data from API
 def fetch_species_data(species_id):
@@ -27,7 +30,7 @@ def fetch_species_data(species_id):
         # Find the specific div containing the filter by attribute traits
         filter_div = soup.find('div', class_='ui scrolling dropdown item')
 
-        
+
         if filter_div:
             # Find all <a> tags within this div to get trait names
             trait_links = filter_div.find_all('a', class_='item')
@@ -66,7 +69,7 @@ def fetch_species_data(species_id):
         return []
 
 # Write headers to CSV file
-with open(csv_file, mode='w', newline='') as file:
+with open(csv_file, mode='w', newline='') as file, open(log_file, mode='w') as log:
     writer = csv.writer(file)
     writer.writerow(['Species ID', 'Trait', 'Trait Value'])
 
@@ -75,5 +78,7 @@ with open(csv_file, mode='w', newline='') as file:
         attributes = fetch_species_data(species_id)
         if attributes:
             writer.writerows(attributes)
+        else:
+            log.write(f"Failed extraction for species_id {species_id}\n")
 
 print(f"Data extraction completed. Results are saved in {csv_file}")
