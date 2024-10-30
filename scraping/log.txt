@@ -1,0 +1,5 @@
+Failed extraction for species_id 331264
+Failed extraction for species_id 58927346
+Failed extraction for species_id 49993780
+Failed extraction for species_id 60782263
+Failed extraction for species_id 64703930
