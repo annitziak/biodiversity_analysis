@@ -1,5 +1,16 @@
 # aml_assignment
 
+# 30-10-2024
+Performed some simple analysis on the distribution of the species data
+
+![Species cumulative distribution](./images/freq_cum_species_id.png)
+
+Around 100 species account for approx. 60% of provided data. 
+
+![Species distribution](./images/freq_dist_species_id.png)
+
+We have a long tail of species with fewer than 500 entries, compared to the maximum recorded entries of 2000 per species.
+
 # 26-10-2024
 
 In order to overcome the problem of incomplete data, we decided to take matters into our own hands and scrape the data from the EOL website, without a thought for ethical and legal considerations. The justification for this is that this data is available freely on the web, such usage is in line with their terms (see: https://api.eol.org/docs/what-is-eol/terms-of-use), and that we need this information for a relatively small scale (only 500 species).
