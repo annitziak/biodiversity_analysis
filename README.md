@@ -56,3 +56,5 @@ Added the code 'locations_definition' to define new clusters with 0.25 degree bo
 The clusters were tested statistically and they are statistically different based on bioblimatic variables using the Kruskal-Wallis H test ( thanks chatgpt)
 
 This is an example of what it looks like. We can see for example for Italy, all the poitns in te alpes are actually color coded with orange and differ from the surrounded areas. (great for the report)
+
+![Species distribution](./images/kmeans_clustering.png)
