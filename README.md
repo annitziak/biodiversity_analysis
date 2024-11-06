@@ -52,7 +52,7 @@ We repeated this for another animal 'Serpentes' and did find the presense of one
 
 ## Annie 6/11
 
-Added the code 'locations_definition' to define new clusters with 0.25 degree boxes. The boxes were only made for locations we had in the map. These were then clustered in 20 new clusters based on bioclimatic. Can access all of this in the Data\species\final_df. The value indicates the bottom left corner of the grid cell. As an example if if lat_grid = -76 and lon_grid = -103 then the grid cell will be from -76 to -75.75 latitude and -103 to -102.75 longitude. 
+Added the code 'locations_definition' to define new clusters with 0.25 degree boxes. The boxes were only made for locations we had in the map. These were then clustered in 20 new clusters based on bioclimatic. Can access all of this in the Data\species\df_final. The value indicates the bottom left corner of the grid cell. As an example if if lat_grid = -76 and lon_grid = -103 then the grid cell will be from -76 to -75.75 latitude and -103 to -102.75 longitude. After that a unique label is generated : combination of cluster + number of box. The number of boxes are numbered row-wise e.g. box 1 is on the left of box 2 - this can help when assesing the algorithms ( if they are vertically close it depends btw - it is not always just +x amount since we only made boxes on locations present in our dataset). This unique label should be used now.
 The clusters were tested statistically and they are statistically different based on bioblimatic variables using the Kruskal-Wallis H test ( thanks chatgpt)
 
 This is an example of what it looks like. We can see for example for Italy, all the poitns in te alpes are actually color coded with orange and differ from the surrounded areas. (great for the report)
