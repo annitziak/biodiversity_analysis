@@ -5,7 +5,7 @@ Performed some simple analysis on the distribution of the species data
 
 ![Species cumulative distribution](./images/freq_cum_species_id.png)
 
-Around 100 species account for approx. 60% of provided data. 
+Around 100 species account for approx. 60% of provided data
 
 ![Species distribution](./images/freq_dist_species_id.png)
 
