@@ -58,3 +58,6 @@ The clusters were tested statistically and they are statistically different base
 This is an example of what it looks like. We can see for example for Italy, all the poitns in te alpes are actually color coded with orange and differ from the surrounded areas. (great for the report)
 
 ![Species distribution](./images/kmeans_clustering.png)
+
+## Ram 7/11
+Made an adjustmnet to how we calculate variance of a given species. Lat/Longs are points mapped onto a higher dimension manifold (aka the globe), and hence you may get inaccurate values taking averages on the lower manifold (aka assuming they are points on a 2D plane). To fix this, we can first map the (lat,long) to cartesian point (x,y,z), and calculate mean based on those values to figure out what the centroid is. Once we have a centroid, we can map it back to (lat, long), and for each (lat, long), measure the haversine distances and calculate the variance based on this function. 
