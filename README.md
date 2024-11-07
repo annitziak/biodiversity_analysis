@@ -64,3 +64,12 @@ Made an adjustmnet to how we calculate variance of a given species. Lat/Longs ar
 
 Displayed the top 2 most and least variant species here. The visualization can be better.
 ![Species variance](./images/variance_top_2.png)
+
+Relevant paper: https://doi.org/10.1016/j.ecolmodel.2005.03.026
+This paper talks about the following points that we would find useful:
+1. Pitfalls of having presence only data
+A number of other serious potential pitfalls may affect the accuracy of presence-only modeling; some of these also apply to presence–absence modeling. First, occurrence localities may be biased. For example, they are often highly correlated with the nearby presence of roads, rivers or other access conduits (Reddy and D´avalos, 2003). The location of occurrence localities may also exhibit spatial auto-correlation (e.g., if a researcher collects specimens from several nearby localities in a restricted area). Similarly, sampling intensity and sampling methods often vary widely across the study area (Anderson, 2003). In addition, errors may exist in the occurrence localities, be it due to transcription errors, lack of sufficient geographic detail (especially in older records), or species misidentification.
+
+2. They model each species' habitat as a 'niche' (similar to our notion), and talk about 'realized' niche and 'fundamental' niche (the first is purely based on our data, and latter is ideally what the species would like in the world). Having positive only data + human factors means that we can only aim to learn the realized niche as an approx. of the fundamental niche for a species. 
+
+3. it compares presence-only modeling methods, and provides us a framework of comparing results. 
