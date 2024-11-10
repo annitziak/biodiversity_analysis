@@ -65,7 +65,7 @@ Made an adjustmnet to how we calculate variance of a given species. Lat/Longs ar
 Displayed the top 2 most and least variant species here. The visualization can be better.
 ![Species variance](./images/variance_top_2.png)
 
-Relevant paper: https://doi.org/10.1016/j.ecolmodel.2005.03.026
+#### paper: https://doi.org/10.1016/j.ecolmodel.2005.03.026
 This paper talks about the following points that we would find useful:
 1. Pitfalls of having presence only data
 A number of other serious potential pitfalls may affect the accuracy of presence-only modeling; some of these also apply to presence–absence modeling. First, occurrence localities may be biased. For example, they are often highly correlated with the nearby presence of roads, rivers or other access conduits (Reddy and D´avalos, 2003). The location of occurrence localities may also exhibit spatial auto-correlation (e.g., if a researcher collects specimens from several nearby localities in a restricted area). Similarly, sampling intensity and sampling methods often vary widely across the study area (Anderson, 2003). In addition, errors may exist in the occurrence localities, be it due to transcription errors, lack of sufficient geographic detail (especially in older records), or species misidentification.
@@ -74,6 +74,16 @@ A number of other serious potential pitfalls may affect the accuracy of presence
 
 3. it compares presence-only modeling methods, and provides us a framework of comparing results. 
 
-Another paper: https://nsojournals.onlinelibrary.wiley.com/doi/epdf/10.1111/j.1600-0587.2013.00321.x
+#### paper: https://nsojournals.onlinelibrary.wiley.com/doi/epdf/10.1111/j.1600-0587.2013.00321.x
 "Although many interesting aspects of the species' distribution can be learned from such data, one cannot learn the overall species occurence probability"
 Rebutts the idea of drawing conclusions about the overall species occurence probability from presence-only data. We could cite this when talking about how we are planning to estimate similar habitats?
+
+#### paper: https://dl.acm.org/doi/pdf/10.1145/3460112.3471966
+1. Provides evaluation methods based on comparing against presence-only data, and comparing to 'public records' like EOL data. It also cites that citizen provided info is as good as professionally collected information. 
+
+## Ram 8/11
+Worked on designing a methodology to identify co-occuring species, given our species location. Basic idea is that given KDE of prob distribution for a species, compare it with KDE for another species and produce a 'similarity' score. We can pick a threshold for similarity, or just pick top K. 
+
+Will work on adding visualization for this, as well as performing hypothesis testing for a given example, to check if the co-occurence is a higher than random chance. We can use this information in tandem with network analysis to talk about how species are related to each other. In the write up, we can mention why we think KDE is a good as an unbiased representation of the population density, the choice of Jensen-Shannon Divergence for scoring similarity.
+
+Code is located in data_viz.ipynb, to reduce merge conflict
