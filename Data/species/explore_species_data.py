@@ -59,6 +59,8 @@ print('Average number of locations per species:  ', species_counts.mean())
 print('Minimum number of locations for a species:', species_counts.min())
 print('Maximum number of locations for a species:', species_counts.max())
 
+print('Test Stats:')
+print('Number of test locations:                ', test_locs.shape[0])
 
 # plot train and test data for a random species
 plt.close('all')
