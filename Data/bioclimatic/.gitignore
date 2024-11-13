@@ -1,2 +1,4 @@
 bioclimatic_test.csv
 cleaned_bioclimatic_test.csv
+bioclimatic_train_extra.csv
+cleaned_bioclimatic_train_extra.csv
