@@ -1,3 +1,7 @@
+> [!WARNING]  
+> bioclimatic_test.csv and cleaned_bioclimatic_test.csv are to big to be pushed on GitHub: please download them locally from:
+> https://drive.google.com/drive/folders/1Ojkg_U0m5Kp5ZZtRLn5YiAnA9nsLqpN_?usp=sharing
+
 # Bioclimatic data
 An information set about the various locations' environmental features has been extracted from the dataframes available at WorldClim; the resulting datasets are stored into bioclimatic_train.csv and bioclimatic_test.csv.
 
