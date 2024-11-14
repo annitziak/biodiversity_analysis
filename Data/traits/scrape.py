@@ -4,14 +4,14 @@ from bs4 import BeautifulSoup
 
 # List of species IDs to query
 species_ids = []  # Add your list of IDs here
-with open("ids.txt", "r") as file:
+with open("ids_extra.txt", "r") as file:
     species_ids = [line.rstrip() for line in file]
 
 # Define the endpoint template
 url_template = "https://api.eol.org/pages/{}/data"
 
 # CSV file to write data
-csv_file = 'my_traits.csv'
+csv_file = 'my_traits_extra.csv'
 log_file = 'log.txt'
 
 # Function to fetch and parse data from API
@@ -78,7 +78,9 @@ with open(csv_file, mode='w', newline='') as file, open(log_file, mode='w') as l
         attributes = fetch_species_data(species_id)
         if attributes:
             writer.writerows(attributes)
+            print(f"Done for species: {species_id}")
         else:
+            print(f"Failed extraction for species: {species_id}")
             log.write(f"Failed extraction for species_id {species_id}\n")
 
 print(f"Data extraction completed. Results are saved in {csv_file}")
