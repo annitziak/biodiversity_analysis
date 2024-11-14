@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 # List of species IDs to query
 species_ids = []  # Add your list of IDs here
-with open("ids_extra.txt", "r") as file:
+with open("failed_ids.txt", "r") as file:
     species_ids = [line.rstrip() for line in file]
 
 # Define the endpoint template
@@ -69,7 +69,7 @@ def fetch_species_data(species_id):
         return []
 
 # Write headers to CSV file
-with open(csv_file, mode='w', newline='') as file, open(log_file, mode='w') as log:
+with open(csv_file, mode='a', newline='') as file, open(log_file, mode='w') as log:
     writer = csv.writer(file)
     writer.writerow(['Species ID', 'Trait', 'Trait Value'])
 
