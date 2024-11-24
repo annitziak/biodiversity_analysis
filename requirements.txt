@@ -1,7 +1,10 @@
+# Data analysis
 pathlib
 pdf2image
-pandas
+pickle
 numpy
+pandas
+math
 seaborn
 matplotlib
 folium
@@ -9,34 +12,8 @@ shapely
 haversine
 geopandas
 contextily
+collections
 scikit-learn
 scipy
 networkx
 cartopy
-
-# Species data cleaning
-pathlib
-numpy
-pandas
-
-# Bioclimatic data extraction
-pathlib
-numpy
-pandas
-rasterio
-rasterio.transform
-
-# Taxonomy data extraction
-pathlib
-requests
-numpy
-pandas
-
-# Traits data extraction
-pathlib
-numpy
-pandas
-ast
-requests
-csv
-bs4

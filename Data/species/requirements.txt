@@ -1,0 +1,4 @@
+# Species data cleaning
+pathlib
+numpy
+pandas

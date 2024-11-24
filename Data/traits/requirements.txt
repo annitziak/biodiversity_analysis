@@ -1,0 +1,8 @@
+# Traits data extraction
+pathlib
+numpy
+pandas
+ast
+requests
+csv
+bs4

@@ -1,0 +1,5 @@
+# Taxonomy data extraction
+pathlib
+requests
+numpy
+pandas

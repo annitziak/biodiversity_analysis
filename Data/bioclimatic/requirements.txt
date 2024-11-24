@@ -1,0 +1,6 @@
+# Bioclimatic data extraction
+pathlib
+numpy
+pandas
+rasterio
+rasterio.transform
