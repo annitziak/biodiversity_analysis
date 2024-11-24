@@ -13,3 +13,30 @@ scikit-learn
 scipy
 networkx
 cartopy
+
+# Species data cleaning
+pathlib
+numpy
+pandas
+
+# Bioclimatic data extraction
+pathlib
+numpy
+pandas
+rasterio
+rasterio.transform
+
+# Taxonomy data extraction
+pathlib
+requests
+numpy
+pandas
+
+# Traits data extraction
+pathlib
+numpy
+pandas
+ast
+requests
+csv
+bs4

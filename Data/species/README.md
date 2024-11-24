@@ -1,5 +1,6 @@
 # Species' locations data
-An information set about the geographical coordinates where different species have been observed; the train data has been collected by citizen scientists and obtained from iNaturalist, the test data - describing the presence of the same species as the training set in other locations - is downloaded from IUCN. The relevant .npz files are loaded and locations presenting invalid environmental values (see Data/bioclimatic) are filtered out; the resulting datasets are stored into species_train.csv, species_train_extra.csv, and species_test.csv.
 
-(https://www.inaturalist.org)
-(https://www.iucnredlist.org/resources/spatial-data-download)
+The positive-only original data is composed of localized sightings for 500 species, provided as training and test sets consisting of 272,037 and 1,706,646 records respectively. The former reflects user-reported observations from [iNaturalist](https://www.inaturalist.org), while the latter represents expert-verified animal distributions from [IUCN](https://www.iucnredlist.org/resources/summary-statistics). The relevant .npz files are loaded and locations presenting invalid environmental values (see [bioclimatic data](../bioclimatic/)) are filtered out. Since only one dimension of information was available, these datasets have been indeed enriched with locations’ bioclimatic information and species’ biological characteristics, to better handle ecology-related questions and investigate models’ performances with data increments.
+
+> [!NOTE]  
+> The resulting datasets are stored into [species_train.csv](./species_train.csv) and [species_test.csv](./species_test.csv) - 271,270 and 1,325,753 rows respectively; further 1,065,589 iNaturalist's cleaned location instances for additional animals can be found in [species_train_extra.csv](./species_train_extra.csv).

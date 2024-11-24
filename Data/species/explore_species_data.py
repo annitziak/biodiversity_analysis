@@ -28,11 +28,10 @@ Data sources:
  -  test data is IUCN - https://www.iucnredlist.org/resources/spatial-data-download
 """
 
-
 import numpy as np
 import matplotlib.pyplot as plt
 
-# loading training data    
+# Loading training data    
 data = np.load('species_train.npz')
 train_locs = data['train_locs']  # 2D array, rows are number of datapoints and 
                                  # columns are "latitude" and "longitude"
@@ -41,7 +40,7 @@ train_ids = data['train_ids']    # 1D array, entries are the ID of the species
 species = data['taxon_ids']      # list of species IDe. Note these do not necessarily start at 0 (or 1)
 species_names = dict(zip(data['taxon_ids'], data['taxon_names']))  # latin names of species 
 
-# loading test data 
+# Loading test data 
 data_test = np.load('species_test.npz', allow_pickle=True)
 test_locs = data_test['test_locs']    # 2D array, rows are number of datapoints 
                                       # and columns are "latitude" and "longitude"
@@ -50,7 +49,7 @@ test_locs = data_test['test_locs']    # 2D array, rows are number of datapoints
 # that they are not present in the other locations 
 test_pos_inds = dict(zip(data_test['taxon_ids'], data_test['test_pos_inds']))    
 
-# data stats
+# Displaying data stats
 print('Train Stats:')
 print('Number of species in train set:           ', len(species))
 print('Number of train locations:                ', train_locs.shape[0])
@@ -62,7 +61,7 @@ print('Maximum number of locations for a species:', species_counts.max())
 print('Test Stats:')
 print('Number of test locations:                ', test_locs.shape[0])
 
-# plot train and test data for a random species
+# Plotting train and test data for a random species
 plt.close('all')
 plt.figure(0)
 
@@ -70,17 +69,16 @@ sp = np.random.choice(species)
 print('\nDisplaying random species:')
 print(str(sp) + ' - ' + species_names[sp]) 
 
-# get test locations and plot
+# Getting test locations and plot
 # test_inds_pos is the locations where the selected species is present
 # test_inds_neg is the locations where the selected species is not present
 test_inds_pos = test_pos_inds[sp]  
 test_inds_neg = np.setdiff1d(np.arange(test_locs.shape[0]), test_pos_inds[sp])
 plt.plot(test_locs[test_inds_pos, 1], test_locs[test_inds_pos, 0], 'b.', label='test')
 
-# get train locations and plot
+# Getting train locations and plot
 train_inds_pos = np.where(train_ids == sp)[0]
 plt.plot(train_locs[train_inds_pos, 1], train_locs[train_inds_pos, 0], 'rx', label='train')
-
 plt.title(str(sp) + ' - ' + species_names[sp])
 plt.grid(True)
 plt.xlim([-180, 180])
@@ -89,4 +87,3 @@ plt.ylabel('latitude')
 plt.xlabel('longitude')
 plt.legend()
 plt.show()
-
