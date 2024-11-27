@@ -1,96 +1,19 @@
-# aml_assignment
+# Applied Machine Learning Assignment
 
-Citations:
-https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=5ce78e97d61f3bf48d1848dcd039a7fb28ff0480
+## Abstract
 
-https://www.annualreviews.org/docserver/fulltext/ecolsys/40/1/annurev.ecolsys.110308.120159.pdf?expires=1730330144&id=id&accname=guest&checksum=3ADC99B6B8F0336C0E4D59DB82D987A2
+This project aims to map and study global biodiversity, exploring key questions such as where particular species are located, what is their variety across different geographic areas, and how they interact with environmental factors and other species. Additional data (i.e., environmental and biological features) in combination with various ML techniques (e.g., K-means, Random Forest, K-Nearest Neighbors, LightGBM, XGBoost) and network analysis methods are leveraged to address these pattern recognition tasks, as the initial dataset — composed of online platforms' user-logged sighting records — is both noisy and low-dimensional compared to the underlying problem's complexity.
 
-https://onlinelibrary.wiley.com/doi/epdf/10.1111/brv.13127
+## Analysis
 
-# 30-10-2024
-Performed some simple analysis on the distribution of the species data
+To produce the insights discussed in the [report](./Project_report.pdf), a series of analyses have been operated which can be found in the relevant [notebook](./Project_analysis.ipynb). These procedures can be run from scratch based on the inputs extracted and cleaned in the [*Data* directory](./Data), or toggling the reproduction of the results stored in the [*Outputs* directory](./Outputs) through the code-behavior Boolean variables at the beginning of the notebook. The packages used are listed in [requirements.txt](./requirements.txt), and an equivalent file is present in the relevant folder for each data preparation process too.
 
-![Species cumulative distribution](./images/freq_cum_species_id.png)
+## Conclusions
 
-Around 100 species account for approx. 60% of provided data
+We examined biodiversity mapping based on species' occurrence data as recorded by sightseeing platforms; our main task was to develop models to predict a set of possible species given a location on the globe, and to define the areas occupied by each species. After an exploratory analysis of the geographic distribution information, we represented the documented presence of species through KDE, visualizing the probability distribution for the various species to be observed worldwide. This technique was used to identify patterns of species’ co-occurrence, and prompted Decision-Tree-based clustering by frequented areas. Early results highlighted the need for further information in order to reach a satisfactory level of species’ mapping accuracy.
 
-![Species distribution](./images/freq_dist_species_id.png)
+To better understand biodiversity patterns, we incorporated environmental data, dividing the worldwide coordinates into regions based on bioclimatic characteristics; grid cells were first clustered using K-means, then grouped into geographically cohesive habitats with DBSCAN. K-Nearest Neighbors and Random Forest models were fine-tuned to predict species presence, showing significant performance improvements when bioclimatic features were included. For the more complex task of assigning species to geographic areas, LightGBM and XGBoost models were trained on six selected regions, leveraging the incorporated sparse species' traits data. As discussed above, the demonstrably broad species distribution made this task inherently challenging. However, it was shown that building region-specific models proved beneficial for enhancing predictions. 
 
-We have a long tail of species with fewer than 500 entries, compared to the maximum recorded entries of 2000 per species.
+Our findings highlight the uneven distribution of biodiversity data, shaped by species' natural occurrences and their likelihood of being recorded by platform users. While ordinary methods achieved moderate success in predicting the most observed species near a location, plain species-to-location models showed low accuracy when not evaluated in specific regions. This aligns with the observation that animals are not strictly tied to narrow areas but are instead associated with favorable environmental conditions and co-occurring species. Predicting a species' exact location reduces biodiversity mapping to estimating where sightings were recorded, which is insufficient for understanding species' distribution. A more effective approach involves embedding their biological traits and comparing them to habitats, testing the fit of environmental and ecological factors.
 
-# 26-10-2024
-
-In order to overcome the problem of incomplete data, we decided to take matters into our own hands and scrape the data from the EOL website, without a thought for ethical and legal considerations. The justification for this is that this data is available freely on the web, such usage is in line with their terms (see: https://api.eol.org/docs/what-is-eol/terms-of-use), and that we need this information for a relatively small scale (only 500 species).
-
-We were able to obtain traits for almost all of the species IDs, for traits that describe it further like 'locomotion', 'mass', and traits that can relate it to other species like 'preyed upon', 'are eaten by' etc.
-
-The corresponding code and information can be foundin /scraping
-
-# 25-10-2024
-
-Investigating the completeness of traits available in traits.csv. 
-This file was downloaded from here: https://opendata.eol.org/dataset/all-trait-data-large/resource/6e24f0df-56ee-470f-b81e-e5a367a65bfb
-
-We noticed a discrepancy between the information presented in the website, and that found in the downloaded csv. 
-As a case study, we picked an animal "Pseudaspis cana" and checked the information on the website here: https://api.eol.org/pages/962419
-this shows traits like "Body symmetry", "are eaten by" etc. 
-
-In order to check if this information is available locally, we first try to find all traits for this animal. We did this by
-
-```
-DFtraits[DFtraits['scientific_name'] == "Pseudaspis cana"]
-```
-
-In order to find out if the trait is present, we first checked if there's a mapping from trait name to trait_id or some other representation, like so:
-
-``` 
-$ grep -E 'are eaten by' Data/traits/terms.csv
-http://purl.obolibrary.org/obo/RO_0002471,are eaten by,association
-```
-
-Next, we filtered by checking for the presence of these traits as string values. 
-
-```
-# DFtraits[DFtraits['page_id'] == 962419].apply(lambda row: row.astype(str).str.contains('RO_0002471').any(), axis=1)
-```
-
-The above search yield false for all values, indicating that no such trait was present.
-We repeated this for another animal 'Serpentes' and did find the presense of one trait (which validated the methodology), but confirmed the hypothesis that the data is incomplete for many animals.
-
-## Annie 6/11
-
-Added the code 'locations_definition' to define new clusters with 0.25 degree boxes. The boxes were only made for locations we had in the map. These were then clustered in 20 new clusters based on bioclimatic. Can access all of this in the Data\species\df_final. The value indicates the bottom left corner of the grid cell. As an example if if lat_grid = -76 and lon_grid = -103 then the grid cell will be from -76 to -75.75 latitude and -103 to -102.75 longitude. After that a unique label is generated : combination of cluster + number of box. The number of boxes are numbered row-wise e.g. box 1 is on the left of box 2 - this can help when assesing the algorithms ( if they are vertically close it depends btw - it is not always just +x amount since we only made boxes on locations present in our dataset). This unique label should be used now.
-The clusters were tested statistically and they are statistically different based on bioblimatic variables using the Kruskal-Wallis H test ( thanks chatgpt)
-
-This is an example of what it looks like. We can see for example for Italy, all the poitns in te alpes are actually color coded with orange and differ from the surrounded areas. (great for the report)
-
-![Species distribution](./images/kmeans_clustering.png)
-
-## Ram 7/11
-Made an adjustmnet to how we calculate variance of a given species. Lat/Longs are points mapped onto a higher dimension manifold (aka the globe), and hence you may get inaccurate values taking averages on the lower manifold (aka assuming they are points on a 2D plane). To fix this, we can first map the (lat,long) to cartesian point (x,y,z), and calculate mean based on those values to figure out what the centroid is. Once we have a centroid, we can map it back to (lat, long), and for each (lat, long), measure the haversine distances and calculate the variance based on this function. 
-
-Displayed the top 2 most and least variant species here. The visualization can be better.
-![Species variance](./images/variance_top_2.png)
-
-#### paper: https://doi.org/10.1016/j.ecolmodel.2005.03.026
-This paper talks about the following points that we would find useful:
-1. Pitfalls of having presence only data
-A number of other serious potential pitfalls may affect the accuracy of presence-only modeling; some of these also apply to presence–absence modeling. First, occurrence localities may be biased. For example, they are often highly correlated with the nearby presence of roads, rivers or other access conduits (Reddy and D´avalos, 2003). The location of occurrence localities may also exhibit spatial auto-correlation (e.g., if a researcher collects specimens from several nearby localities in a restricted area). Similarly, sampling intensity and sampling methods often vary widely across the study area (Anderson, 2003). In addition, errors may exist in the occurrence localities, be it due to transcription errors, lack of sufficient geographic detail (especially in older records), or species misidentification.
-
-2. They model each species' habitat as a 'niche' (similar to our notion), and talk about 'realized' niche and 'fundamental' niche (the first is purely based on our data, and latter is ideally what the species would like in the world). Having positive only data + human factors means that we can only aim to learn the realized niche as an approx. of the fundamental niche for a species. 
-
-3. it compares presence-only modeling methods, and provides us a framework of comparing results. 
-
-#### paper: https://nsojournals.onlinelibrary.wiley.com/doi/epdf/10.1111/j.1600-0587.2013.00321.x
-"Although many interesting aspects of the species' distribution can be learned from such data, one cannot learn the overall species occurence probability"
-Rebutts the idea of drawing conclusions about the overall species occurence probability from presence-only data. We could cite this when talking about how we are planning to estimate similar habitats?
-
-#### paper: https://dl.acm.org/doi/pdf/10.1145/3460112.3471966
-1. Provides evaluation methods based on comparing against presence-only data, and comparing to 'public records' like EOL data. It also cites that citizen provided info is as good as professionally collected information. 
-
-## Ram 8/11
-Worked on designing a methodology to identify co-occuring species, given our species location. Basic idea is that given KDE of prob distribution for a species, compare it with KDE for another species and produce a 'similarity' score. We can pick a threshold for similarity, or just pick top K. 
-
-Will work on adding visualization for this, as well as performing hypothesis testing for a given example, to check if the co-occurence is a higher than random chance. We can use this information in tandem with network analysis to talk about how species are related to each other. In the write up, we can mention why we think KDE is a good as an unbiased representation of the population density, the choice of Jensen-Shannon Divergence for scoring similarity.
-
-Code is located in data_viz.ipynb, to reduce merge conflict
+Finally, considering the complex systems that the original dataset qualitatively represents, we delved into an ecosystem-oriented study, leveraging the obtained location- and environment-based habitats determination together with the interaction properties of each species, to address shortages and enhance a causal understanding of our other results. This network-based ecological analysis provided an additional layer of insight, linking species’ co-occurrences to biological relations and suggesting potential methods to obtain better ecological knowledge, to be used as citizen science platforms’ strategies to gamify collection efforts targeted at verifying predictions and filling information gaps.
