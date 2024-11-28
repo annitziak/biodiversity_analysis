@@ -1,1 +1,5 @@
 habitats_test.csv
+RF_model.pickle
+RF_wENV_model.pickle
+LGBM_grid-cell_model.pickle
+XGB_grid-cell_model.pickle

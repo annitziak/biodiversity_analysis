@@ -14,7 +14,10 @@ geopandas
 contextily
 collections
 scikit-learn
+lightgbm
+xgboost
 scipy
 networkx
 cartopy
 graphviz
+re

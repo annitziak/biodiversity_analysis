@@ -8,6 +8,9 @@ This project aims to map and study global biodiversity, exploring key questions 
 
 To produce the insights discussed in the [report](./Project_report.pdf), a series of analyses have been operated which can be found in the relevant [notebook](./Project_analysis.ipynb). These procedures can be run from scratch based on the inputs extracted and cleaned in the [*Data* directory](./Data), or toggling the reproduction of the results stored in the [*Outputs* directory](./Outputs) through the code-behavior Boolean variables at the beginning of the notebook. The packages used are listed in [requirements.txt](./requirements.txt), and an equivalent file is present in the relevant folder for each data preparation process too.
 
+> [!WARNING]  
+> Some input and output data needed to run specific parts of the code are missing from the appropriate folder, since they are too heavy to be pushed on GitHub: please download them locally [here](https://drive.google.com/drive/folders/1Ojkg_U0m5Kp5ZZtRLn5YiAnA9nsLqpN_?usp=sharing).
+
 ## Conclusions
 
 We examined biodiversity mapping based on species' occurrence data as recorded by sightseeing platforms; our main task was to develop models to predict a set of possible species given a location on the globe, and to define the areas occupied by each species. After an exploratory analysis of the geographic distribution information, we represented the documented presence of species through KDE, visualizing the probability distribution for the various species to be observed worldwide. This technique was used to identify patterns of species’ co-occurrence, and prompted Decision-Tree-based clustering by frequented areas. Early results highlighted the need for further information in order to reach a satisfactory level of species’ mapping accuracy.
