@@ -23,4 +23,4 @@ Finally, considering the complex systems that the original dataset qualitatively
 
 ### Ecosystem summative graph-representation example
 
-![Ecosystem](Outputs/amazon_rainforest_net.pdf)
+![Ecosystem](Outputs/amazon_rainforest_net.png)
